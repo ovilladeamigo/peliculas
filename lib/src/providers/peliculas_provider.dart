@@ -12,14 +12,18 @@ class PeliculaProvider {
   String _language = 'es-UY';
 
   int _popularesPage = 0;
+  bool _cargando = false;
 
   List<Pelicula> populares = new List();
 
-  final _popularesStreamController = new StreamController<List<Pelicula>>.broadcast();
+  final _popularesStreamController =
+      new StreamController<List<Pelicula>>.broadcast();
 
-  Function(List<Pelicula>) get popularesSink => _popularesStreamController.sink.add;
+  Function(List<Pelicula>) get popularesSink =>
+      _popularesStreamController.sink.add;
 
-  Stream<List<Pelicula>> get popularesStream => _popularesStreamController.stream;
+  Stream<List<Pelicula>> get popularesStream =>
+      _popularesStreamController.stream;
 
   void disposeStreams() {
     _popularesStreamController?.close();
@@ -33,7 +37,12 @@ class PeliculaProvider {
   }
 
   Future<List<Pelicula>> getPopulares() async {
+    if (_cargando) return [];
+    _cargando = true;
+
     _popularesPage++;
+
+    print('Cargando siguientes... ');
 
     final url = Uri.https(_url, '/3/movie/popular', {
       'api_key': _apiKey,
@@ -46,6 +55,8 @@ class PeliculaProvider {
     populares.addAll(resp);
 
     popularesSink(populares);
+
+    _cargando = false;
 
     return resp;
   }

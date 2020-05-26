@@ -5,7 +5,7 @@ import 'package:peliculas/src/widgets/movie_horizontal_widget.dart';
 
 import '../models/pelicula_model.dart';
 
-class HomePAge extends StatelessWidget {
+class HomePage extends StatelessWidget {
   final _peliculaProvider = new PeliculaProvider();
 
   @override
@@ -44,8 +44,6 @@ class HomePAge extends StatelessWidget {
                 child: Center(child: CircularProgressIndicator()));
           }
         });
-
-    //
   }
 
   Widget _footer(BuildContext context) {

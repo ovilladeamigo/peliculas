@@ -69,4 +69,11 @@ class Pelicula {
     }
     return 'https://image.tmdb.org/t/p/w500/$posterPath';
   }
+
+  getBackgroundImg(){
+    if (backdropPath == null ){
+      return "https://previews.123rf.com/images/urfandadashov/urfandadashov1809/urfandadashov180901275/109135379-photo-not-available-vector-icon-isolated-on-transparent-background-photo-not-available-logo-concept.jpg";
+    }
+    return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+  }
 }
